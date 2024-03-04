@@ -1,0 +1,41 @@
+ServerRoot "/etc/apache2"
+
+LockFile ${APACHE_LOCK_DIR}/accept.lock
+
+PidFile ${APACHE_PID_FILE}
+
+Timeout 300
+
+KeepAlive On
+
+MaxKeepAliveRequests 100
+
+KeepAliveTimeout 5
+
+<IfModule mpm_prefork_module>
+    StartServers              {{ apache_start_servers | default(5) }}
+    MinSpareServers           {{ apache_min_spare_servers | default(5) }}
+    MaxSpareServers           {{ apache_max_spare_servers | default(10) }}
+    MaxClients                {{ apache_max_clients | default(150) }}
+    MaxRequestsPerChild       0
+</IfModule>
+
+<IfModule mpm_worker_module>
+    StartServers              {{ apache_start_servers | default(2) }}
+    MinSpareThreads           {{ apache_min_spare_threads | default(25) }}
+    MaxSpareThreads           {{ apache_max_spare_threads | default(75) }}
+    ThreadLimit               {{ apache_thread_limit | default(64) }}
+    ThreadsPerChild           {{ apache_threads_per_child | default(25) }}
+    MaxClients                {{ apache_max_clients | default(150) }}
+    MaxRequestsPerChild       0
+</IfModule>
+
+<IfModule mpm_event_module>
+    StartServers              {{ apache_start_servers | default(2) }}
+    MinSpareThreads           {{ apache_min_spare_threads | default(25) }}
+    MaxSpareThreads           {{ apache_max_spare_threads | default(75) }}
+    ThreadLimit               {{ apache_thread_limit | default(64) }}
+    ThreadsPerChild           {{ apache_threads_per_child | default(25) }}
+    MaxClients                {{ apache_max_clients | default(150) }}
+    MaxRequestsPerChild       0
+</IfModule>

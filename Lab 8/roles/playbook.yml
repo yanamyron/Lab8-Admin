@@ -1,0 +1,6 @@
+---
+- name: Install and configure Apache2 server
+  hosts: 192.168.56.1
+  become: true
+  roles:
+    - Myron

@@ -1,0 +1,12 @@
+---
+apache_user: www-data
+apache_group: www-data
+apache_start_servers: 5
+apache_min_spare_servers: 5
+apache_max_spare_servers: 10
+apache_max_clients: 150
+apache_min_spare_threads: 25
+apache_max_spare_threads: 75
+apache_thread_limit: 64
+apache_threads_per_child: 25
+

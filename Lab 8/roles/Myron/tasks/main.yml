@@ -1,0 +1,16 @@
+---
+- name: Install Apache2
+  apt:
+    name: apache2
+    state: present
+
+- name: Copy Apache2 configuration
+  template:
+    src: apache2.conf.j2
+    dest: /etc/apache2/apache2.conf
+  notify: Restart Apache2
+
+- name: Start Apache2 service
+  service:
+    name: apache2
+    state: started
